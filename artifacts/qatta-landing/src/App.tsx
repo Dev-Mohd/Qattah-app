@@ -3,8 +3,6 @@ import { motion, AnimatePresence } from "framer-motion";
 import {
   Menu,
   X,
-  Apple,
-  Play,
   CheckCircle2,
   ListChecks,
   Clock,
@@ -24,12 +22,14 @@ import {
   Database
 } from "lucide-react";
 
-import screen1 from "@assets/Qattah1_1779006339253.jpg";
-import screen2 from "@assets/Qattah2_1779006339253.jpg";
-import screen3 from "@assets/Qattah3_1779006339253.jpg";
-import screen4 from "@assets/Qattah4_1779006339253.jpg";
-import screen5 from "@assets/Qattah5_1779006339253.jpg";
-import screen6 from "@assets/Qattah6_1779006339253.jpg";
+import screen1 from "@assets/WhatsApp_Image\u200f_1447-11-30_at_11.54.36_(2)_1779008325210.jpeg";
+import screen2 from "@assets/WhatsApp_Image\u200f_1447-11-30_at_11.54.35_(3)_1779008325210.jpeg";
+import screen3 from "@assets/WhatsApp_Image\u200f_1447-11-30_at_11.54.36_(3)_1779008325210.jpeg";
+import screen4 from "@assets/WhatsApp_Image\u200f_1447-11-30_at_11.54.35_1779008325210.jpeg";
+import screen5 from "@assets/WhatsApp_Image\u200f_1447-11-30_at_11.54.35_(2)_1779008325211.jpeg";
+import screen6 from "@assets/WhatsApp_Image\u200f_1447-11-30_at_11.54.36_1779008325210.jpeg";
+import screen7 from "@assets/WhatsApp_Image\u200f_1447-11-30_at_11.54.35_(1)_1779008325211.jpeg";
+import screen8 from "@assets/WhatsApp_Image\u200f_1447-11-30_at_11.54.36_(1)_1779008325210.jpeg";
 
 const QattahIcon = ({ id = "a", size = 40 }: { id?: string; size?: number }) => (
   <svg width={size} height={size} viewBox="0 0 120 120" fill="none">
@@ -64,30 +64,56 @@ const QattahWordmark = ({ className = "text-2xl" }: { className?: string }) => (
   </span>
 );
 
-/* The updated ScreenCard with vignette effect matching the section background */
 const ScreenCard = ({
   src,
   alt,
-  bgClass = "from-[#0A0F0D]", // Defaults to main background
   className = "",
 }: {
   src: string;
   alt: string;
-  bgClass?: string;
   className?: string;
 }) => (
   <div className={`relative w-full max-w-sm mx-auto ${className}`}>
-    <div className="absolute inset-0 bg-accent/15 rounded-full blur-3xl scale-75 -z-10" />
-    <div className="relative rounded-3xl overflow-hidden shadow-2xl shadow-black/50 ring-1 ring-white/5 bg-black">
-      {/* Vignette gradients */}
-      <div className={`absolute top-0 inset-x-0 h-24 bg-gradient-to-b ${bgClass} to-transparent z-10`} />
-      <div className={`absolute bottom-0 inset-x-0 h-24 bg-gradient-to-t ${bgClass} to-transparent z-10`} />
-      <div className={`absolute top-0 bottom-0 left-0 w-16 bg-gradient-to-r ${bgClass} to-transparent z-10`} />
-      <div className={`absolute top-0 bottom-0 right-0 w-16 bg-gradient-to-l ${bgClass} to-transparent z-10`} />
-      
-      <img src={src} alt={alt} className="w-full block relative z-0" />
+    <div className="absolute inset-0 bg-accent/10 rounded-full blur-3xl scale-75 -z-10" />
+    <div className="relative rounded-3xl overflow-hidden shadow-2xl shadow-black/60 ring-1 ring-white/8">
+      <img src={src} alt={alt} className="w-full block" />
     </div>
   </div>
+);
+
+const AppStoreBadge = ({ className = "" }: { className?: string }) => (
+  <a
+    href="#"
+    data-testid="badge-appstore"
+    className={`inline-flex items-center gap-3 bg-black border border-white/15 rounded-2xl px-5 py-3 hover:border-white/30 hover:bg-white/5 transition-all duration-200 ${className}`}
+  >
+    <svg width="24" height="28" viewBox="0 0 24 28" fill="white">
+      <path d="M20.16 14.77c-.04-3.39 2.77-5.02 2.9-5.09-1.58-2.31-4.04-2.63-4.91-2.66-2.08-.21-4.07 1.23-5.13 1.23-1.06 0-2.69-1.21-4.43-1.18-2.26.04-4.36 1.33-5.52 3.35-2.37 4.1-.61 10.17 1.68 13.5 1.14 1.63 2.47 3.45 4.22 3.39 1.7-.07 2.34-1.09 4.4-1.09 2.05 0 2.65 1.09 4.44 1.05 1.83-.03 2.98-1.65 4.09-3.29 1.3-1.88 1.83-3.7 1.86-3.8-.04-.01-3.57-1.37-3.6-5.41zM16.8 5.19c.94-1.14 1.58-2.72 1.4-4.29-1.35.06-2.98.9-3.94 2.02-.86 1-1.62 2.58-1.42 4.11 1.5.11 3.04-.77 3.96-1.84z"/>
+    </svg>
+    <div>
+      <div className="text-white/50 text-[10px] font-medium leading-none mb-1">Download on the</div>
+      <div className="text-white text-[18px] font-bold leading-none tracking-tight">App Store</div>
+    </div>
+  </a>
+);
+
+const GooglePlayBadge = ({ className = "" }: { className?: string }) => (
+  <a
+    href="#"
+    data-testid="badge-playstore"
+    className={`inline-flex items-center gap-3 bg-black border border-white/15 rounded-2xl px-5 py-3 hover:border-white/30 hover:bg-white/5 transition-all duration-200 ${className}`}
+  >
+    <svg width="24" height="26" viewBox="0 0 24 26">
+      <path fill="#34A853" d="M0 23.1V2.9c0-.5.3-.9.7-1.1L13.4 13 .7 24.2c-.4-.2-.7-.6-.7-1.1z"/>
+      <path fill="#EA4335" d="M17.8 17.3l-4.4-4.3 4.4-4.3 4.9 2.8c1.4.8 1.4 2.2 0 3l-4.9 2.8z"/>
+      <path fill="#FBBC05" d="M13.4 13L.7 1.8c.1 0 .2-.1.3-.1.3 0 .6.1.9.3l15.9 9.2-4.4 1.8z"/>
+      <path fill="#4285F4" d="M13.4 13l4.4 4.3L1.9 26c-.3.2-.6.3-.9.3-.1 0-.2 0-.3-.1L13.4 13z"/>
+    </svg>
+    <div>
+      <div className="text-white/50 text-[10px] font-medium leading-none mb-1">Get it on</div>
+      <div className="text-white text-[18px] font-bold leading-none tracking-tight">Google Play</div>
+    </div>
+  </a>
 );
 
 const Button = ({ children, variant = "primary", className = "", ...props }: any) => {
@@ -181,14 +207,8 @@ const Hero = () => (
           </p>
 
           <div className="flex flex-col sm:flex-row items-center gap-4 justify-center lg:justify-start">
-            <Button variant="white" className="w-full sm:w-auto h-14 px-8 text-lg" data-testid="hero-appstore">
-              <Apple className="w-6 h-6" />
-              App Store
-            </Button>
-            <Button variant="outline" className="w-full sm:w-auto h-14 px-8 text-lg bg-[#0A0F0D]/50 backdrop-blur-md" data-testid="hero-playstore">
-              <Play className="w-6 h-6" />
-              Google Play
-            </Button>
+            <AppStoreBadge className="w-full sm:w-auto justify-center" />
+            <GooglePlayBadge className="w-full sm:w-auto justify-center" />
           </div>
 
           <div className="mt-12 flex items-center gap-6 justify-center lg:justify-start">
@@ -215,7 +235,7 @@ const Hero = () => (
           transition={{ duration: 0.9, delay: 0.2, ease: "easeOut" }}
           className="flex-1 w-full max-w-sm mx-auto relative"
         >
-          <ScreenCard src={screen1} alt="واجهة تطبيق قطّه الرئيسية" bgClass="from-[#0A0F0D]" />
+          <ScreenCard src={screen1} alt="واجهة تطبيق قطّه الرئيسية" />
         </motion.div>
       </div>
     </div>
@@ -295,7 +315,7 @@ const FeatureBlock = ({
       viewport={{ once: true }}
       className="flex-1 w-full"
     >
-      <ScreenCard src={img} alt={imgAlt} bgClass="from-[#0A0F0D]" />
+      <ScreenCard src={img} alt={imgAlt} />
     </motion.div>
   </div>
 );
@@ -375,8 +395,10 @@ const AppScreens = () => {
   const screens = [
     { img: screen1, label: "الرئيسية" },
     { img: screen2, label: "القوائم" },
+    { img: screen8, label: "الوجبات" },
+    { img: screen4, label: "الأرصدة" },
+    { img: screen7, label: "الإحصائيات" },
     { img: screen5, label: "التقارير" },
-    { img: screen6, label: "الإعدادات" },
   ];
 
   return (
@@ -399,7 +421,7 @@ const AppScreens = () => {
               transition={{ delay: i * 0.1 }}
               className="snap-center shrink-0 flex flex-col items-center gap-6 w-64"
             >
-              <ScreenCard src={s.img} alt={s.label} bgClass="from-[#0A0F0D]" />
+              <ScreenCard src={s.img} alt={s.label} />
               <div className="text-center mt-2">
                 <span className="text-[11px] font-bold text-white/30 tracking-[3px] uppercase px-4 py-2 rounded-full border border-white/5 bg-white/5">
                   {s.label}
@@ -450,7 +472,7 @@ const Reports = () => (
           viewport={{ once: true }}
           className="flex-1 w-full max-w-sm mx-auto"
         >
-          <ScreenCard src={screen5} alt="تقارير قطّه" bgClass="from-[#0d1612]" />
+          <ScreenCard src={screen5} alt="تقارير قطّه" />
         </motion.div>
       </div>
     </div>
@@ -594,14 +616,8 @@ const CTA = () => (
             حمّل قطّه الآن وابدأ بتنظيم مصاريف الدوام في ثوانٍ.
           </p>
           <div className="flex flex-col sm:flex-row items-center gap-4 justify-center">
-            <Button variant="white" className="w-full sm:w-auto h-14 px-8 text-lg">
-              <Apple className="w-6 h-6" />
-              App Store
-            </Button>
-            <Button variant="outline" className="w-full sm:w-auto h-14 px-8 text-lg bg-black/20 backdrop-blur-md">
-              <Play className="w-6 h-6" />
-              Google Play
-            </Button>
+            <AppStoreBadge className="w-full sm:w-auto justify-center" />
+            <GooglePlayBadge className="w-full sm:w-auto justify-center" />
           </div>
         </div>
       </div>
