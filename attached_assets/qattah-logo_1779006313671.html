@@ -1,0 +1,451 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>قطّه — الشعار</title>
+<link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;700;900&display=swap" rel="stylesheet">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: #0f0f0f;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 60px;
+    padding: 60px 20px;
+    font-family: 'Tajawal', sans-serif;
+  }
+
+  .section-label {
+    color: #444;
+    font-size: 12px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    margin-bottom: 24px;
+    text-align: center;
+  }
+
+  /* ═══════════════════════════════════════
+     الشعار الرئيسي — أيقونة + نص
+  ═══════════════════════════════════════ */
+  .logo-main {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0;
+    animation: fadeUp 0.8s ease both;
+  }
+
+  .logo-icon-wrap {
+    position: relative;
+    width: 120px;
+    height: 120px;
+  }
+
+  .logo-icon-wrap svg {
+    width: 100%;
+    height: 100%;
+    filter: drop-shadow(0 8px 32px rgba(16, 185, 129, 0.4));
+  }
+
+  .logo-wordmark {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: -8px;
+  }
+
+  .logo-ar {
+    font-size: 52px;
+    font-weight: 900;
+    color: #fff;
+    letter-spacing: -1px;
+    line-height: 1;
+  }
+
+  .logo-ar span {
+    color: #10b981;
+  }
+
+  .logo-tagline {
+    font-size: 13px;
+    color: #6b7280;
+    letter-spacing: 1px;
+    margin-top: 6px;
+  }
+
+  /* ═══════════════════════════════════════
+     نسخة افقية
+  ═══════════════════════════════════════ */
+  .logo-horizontal {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    animation: fadeUp 0.8s 0.2s ease both;
+    opacity: 0;
+    animation-fill-mode: forwards;
+  }
+
+  .logo-horizontal .icon-sm svg {
+    width: 56px;
+    height: 56px;
+    filter: drop-shadow(0 4px 16px rgba(16, 185, 129, 0.35));
+  }
+
+  .logo-horizontal .text-wrap {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .logo-horizontal .name {
+    font-size: 32px;
+    font-weight: 900;
+    color: #fff;
+    line-height: 1;
+  }
+
+  .logo-horizontal .name span { color: #10b981; }
+
+  .logo-horizontal .sub {
+    font-size: 11px;
+    color: #6b7280;
+    letter-spacing: 1.5px;
+    margin-top: 3px;
+  }
+
+  /* ═══════════════════════════════════════
+     أيقونة اللتطبيق
+  ═══════════════════════════════════════ */
+  .app-icon-wrap {
+    display: flex;
+    gap: 24px;
+    animation: fadeUp 0.8s 0.4s ease both;
+    opacity: 0;
+    animation-fill-mode: forwards;
+  }
+
+  .app-icon {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .app-icon-box {
+    border-radius: 28px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 16px 48px rgba(0,0,0,0.5);
+  }
+
+  .app-icon-box.dark {
+    background: linear-gradient(145deg, #064e35 0%, #065f46 50%, #047857 100%);
+    width: 100px; height: 100px;
+  }
+
+  .app-icon-box.light {
+    background: linear-gradient(145deg, #ecfdf5 0%, #d1fae5 100%);
+    width: 100px; height: 100px;
+  }
+
+  .app-icon-box svg { width: 58px; height: 58px; }
+
+  .app-icon span {
+    font-size: 11px;
+    color: #555;
+    letter-spacing: 1px;
+  }
+
+  /* ═══════════════════════════════════════
+     لوحة الألوان
+  ═══════════════════════════════════════ */
+  .palette {
+    display: flex;
+    gap: 12px;
+    animation: fadeUp 0.8s 0.6s ease both;
+    opacity: 0;
+    animation-fill-mode: forwards;
+  }
+
+  .swatch {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .swatch-box {
+    width: 64px;
+    height: 64px;
+    border-radius: 16px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.4);
+  }
+
+  .swatch span {
+    font-size: 10px;
+    color: #555;
+    letter-spacing: 0.5px;
+  }
+
+  .swatch .hex {
+    font-size: 10px;
+    color: #333;
+  }
+
+  /* ═══════════════════════════════════════
+     خلفيات متعددة
+  ═══════════════════════════════════════ */
+  .bg-variants {
+    display: flex;
+    gap: 16px;
+    animation: fadeUp 0.8s 0.8s ease both;
+    opacity: 0;
+    animation-fill-mode: forwards;
+  }
+
+  .bg-card {
+    width: 160px;
+    height: 100px;
+    border-radius: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    flex-direction: column;
+  }
+
+  .bg-card.on-dark { background: #111; border: 1px solid #222; }
+  .bg-card.on-white { background: #fff; }
+  .bg-card.on-green { background: linear-gradient(135deg, #064e35, #059669); }
+
+  .bg-card .mini-name {
+    font-size: 20px;
+    font-weight: 900;
+  }
+
+  .bg-card.on-dark .mini-name { color: #fff; }
+  .bg-card.on-dark .mini-name span { color: #10b981; }
+  .bg-card.on-white .mini-name { color: #064e35; }
+  .bg-card.on-white .mini-name span { color: #10b981; }
+  .bg-card.on-green .mini-name { color: #fff; }
+  .bg-card.on-green .mini-name span { color: #6ee7b7; }
+
+  .bg-card .mini-tag {
+    font-size: 9px;
+    letter-spacing: 1px;
+  }
+  .bg-card.on-dark .mini-tag { color: #555; }
+  .bg-card.on-white .mini-tag { color: #9ca3af; }
+  .bg-card.on-green .mini-tag { color: rgba(255,255,255,0.5); }
+
+  /* divider */
+  .divider {
+    width: 100%;
+    max-width: 600px;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, #222, transparent);
+  }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+</style>
+</head>
+<body>
+
+<!-- ══════════════════════════════════════════
+     الشعار الرئيسي
+══════════════════════════════════════════ -->
+<div>
+  <p class="section-label">الشعار الرئيسي</p>
+  <div class="logo-main">
+    <div class="logo-icon-wrap">
+      <svg viewBox="0 0 120 120" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <!-- خلفية دائرة -->
+        <circle cx="60" cy="60" r="54" fill="url(#bgGrad)"/>
+        <!-- ورقة الحساب -->
+        <rect x="34" y="28" width="52" height="64" rx="8" fill="url(#paperGrad)" opacity="0.15"/>
+        <rect x="34" y="28" width="52" height="64" rx="8" stroke="url(#strokeGrad)" stroke-width="2"/>
+        <!-- خطوط النص -->
+        <line x1="44" y1="46" x2="76" y2="46" stroke="#6ee7b7" stroke-width="2.5" stroke-linecap="round"/>
+        <line x1="44" y1="58" x2="76" y2="58" stroke="#6ee7b7" stroke-width="2.5" stroke-linecap="round" opacity="0.6"/>
+        <line x1="44" y1="70" x2="62" y2="70" stroke="#6ee7b7" stroke-width="2.5" stroke-linecap="round" opacity="0.4"/>
+        <!-- علامة الصح -->
+        <circle cx="76" cy="78" r="14" fill="url(#checkGrad)"/>
+        <polyline points="70,78 74,83 83,72" stroke="#fff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+        <defs>
+          <linearGradient id="bgGrad" x1="0" y1="0" x2="120" y2="120" gradientUnits="userSpaceOnUse">
+            <stop offset="0%" stop-color="#064e35"/>
+            <stop offset="100%" stop-color="#065f46"/>
+          </linearGradient>
+          <linearGradient id="paperGrad" x1="34" y1="28" x2="86" y2="92" gradientUnits="userSpaceOnUse">
+            <stop offset="0%" stop-color="#10b981"/>
+            <stop offset="100%" stop-color="#059669"/>
+          </linearGradient>
+          <linearGradient id="strokeGrad" x1="34" y1="28" x2="86" y2="92" gradientUnits="userSpaceOnUse">
+            <stop offset="0%" stop-color="#34d399"/>
+            <stop offset="100%" stop-color="#10b981"/>
+          </linearGradient>
+          <linearGradient id="checkGrad" x1="62" y1="64" x2="90" y2="92" gradientUnits="userSpaceOnUse">
+            <stop offset="0%" stop-color="#10b981"/>
+            <stop offset="100%" stop-color="#059669"/>
+          </linearGradient>
+        </defs>
+      </svg>
+    </div>
+    <div class="logo-wordmark">
+      <div class="logo-ar">قطّ<span>ه</span></div>
+
+    </div>
+  </div>
+</div>
+
+<div class="divider"></div>
+
+<!-- ══════════════════════════════════════════
+     النسخة الأفقية
+══════════════════════════════════════════ -->
+<div>
+  <p class="section-label">النسخة الأفقية</p>
+  <div class="logo-horizontal">
+    <div class="icon-sm">
+      <svg viewBox="0 0 120 120" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="60" cy="60" r="54" fill="url(#bgGrad2)"/>
+        <rect x="34" y="28" width="52" height="64" rx="8" fill="url(#paperGrad2)" opacity="0.15"/>
+        <rect x="34" y="28" width="52" height="64" rx="8" stroke="url(#strokeGrad2)" stroke-width="2"/>
+        <line x1="44" y1="46" x2="76" y2="46" stroke="#6ee7b7" stroke-width="2.5" stroke-linecap="round"/>
+        <line x1="44" y1="58" x2="76" y2="58" stroke="#6ee7b7" stroke-width="2.5" stroke-linecap="round" opacity="0.6"/>
+        <line x1="44" y1="70" x2="62" y2="70" stroke="#6ee7b7" stroke-width="2.5" stroke-linecap="round" opacity="0.4"/>
+        <circle cx="76" cy="78" r="14" fill="url(#checkGrad2)"/>
+        <polyline points="70,78 74,83 83,72" stroke="#fff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+        <defs>
+          <linearGradient id="bgGrad2" x1="0" y1="0" x2="120" y2="120" gradientUnits="userSpaceOnUse">
+            <stop offset="0%" stop-color="#064e35"/>
+            <stop offset="100%" stop-color="#065f46"/>
+          </linearGradient>
+          <linearGradient id="paperGrad2" x1="34" y1="28" x2="86" y2="92" gradientUnits="userSpaceOnUse">
+            <stop offset="0%" stop-color="#10b981"/>
+            <stop offset="100%" stop-color="#059669"/>
+          </linearGradient>
+          <linearGradient id="strokeGrad2" x1="34" y1="28" x2="86" y2="92" gradientUnits="userSpaceOnUse">
+            <stop offset="0%" stop-color="#34d399"/>
+            <stop offset="100%" stop-color="#10b981"/>
+          </linearGradient>
+          <linearGradient id="checkGrad2" x1="62" y1="64" x2="90" y2="92" gradientUnits="userSpaceOnUse">
+            <stop offset="0%" stop-color="#10b981"/>
+            <stop offset="100%" stop-color="#059669"/>
+          </linearGradient>
+        </defs>
+      </svg>
+    </div>
+    <div class="text-wrap">
+      <div class="name">قطّ<span>ه</span></div>
+
+    </div>
+  </div>
+</div>
+
+<div class="divider"></div>
+
+<!-- ══════════════════════════════════════════
+     أيقونة التطبيق
+══════════════════════════════════════════ -->
+<div>
+  <p class="section-label">أيقونة التطبيق</p>
+  <div class="app-icon-wrap">
+    <div class="app-icon">
+      <div class="app-icon-box dark">
+        <svg viewBox="0 0 120 120" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <rect x="28" y="20" width="64" height="80" rx="10" fill="rgba(16,185,129,0.15)" stroke="#10b981" stroke-width="2"/>
+          <line x1="40" y1="42" x2="80" y2="42" stroke="#34d399" stroke-width="3" stroke-linecap="round"/>
+          <line x1="40" y1="57" x2="80" y2="57" stroke="#34d399" stroke-width="3" stroke-linecap="round" opacity="0.6"/>
+          <line x1="40" y1="72" x2="60" y2="72" stroke="#34d399" stroke-width="3" stroke-linecap="round" opacity="0.4"/>
+          <circle cx="76" cy="82" r="16" fill="#10b981"/>
+          <polyline points="69,82 74,88 84,75" stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+        </svg>
+      </div>
+      <span>داكن</span>
+    </div>
+    <div class="app-icon">
+      <div class="app-icon-box light">
+        <svg viewBox="0 0 120 120" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <rect x="28" y="20" width="64" height="80" rx="10" fill="rgba(6,78,53,0.08)" stroke="#064e35" stroke-width="2"/>
+          <line x1="40" y1="42" x2="80" y2="42" stroke="#059669" stroke-width="3" stroke-linecap="round"/>
+          <line x1="40" y1="57" x2="80" y2="57" stroke="#059669" stroke-width="3" stroke-linecap="round" opacity="0.6"/>
+          <line x1="40" y1="72" x2="60" y2="72" stroke="#059669" stroke-width="3" stroke-linecap="round" opacity="0.4"/>
+          <circle cx="76" cy="82" r="16" fill="#059669"/>
+          <polyline points="69,82 74,88 84,75" stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+        </svg>
+      </div>
+      <span>فاتح</span>
+    </div>
+  </div>
+</div>
+
+<div class="divider"></div>
+
+<!-- ══════════════════════════════════════════
+     لوحة الألوان
+══════════════════════════════════════════ -->
+<div>
+  <p class="section-label">لوحة الألوان</p>
+  <div class="palette">
+    <div class="swatch">
+      <div class="swatch-box" style="background:#064e35"></div>
+      <span>الرئيسي</span>
+      <span class="hex">#064E35</span>
+    </div>
+    <div class="swatch">
+      <div class="swatch-box" style="background:#10b981"></div>
+      <span>التأكيد</span>
+      <span class="hex">#10B981</span>
+    </div>
+    <div class="swatch">
+      <div class="swatch-box" style="background:#6ee7b7"></div>
+      <span>فاتح</span>
+      <span class="hex">#6EE7B7</span>
+    </div>
+    <div class="swatch">
+      <div class="swatch-box" style="background:#ecfdf5; border: 1px solid #d1fae5"></div>
+      <span>الخلفية</span>
+      <span class="hex">#ECFDF5</span>
+    </div>
+    <div class="swatch">
+      <div class="swatch-box" style="background:#111827"></div>
+      <span>داكن</span>
+      <span class="hex">#111827</span>
+    </div>
+  </div>
+</div>
+
+<div class="divider"></div>
+
+<!-- ══════════════════════════════════════════
+     الشعار على خلفيات مختلفة
+══════════════════════════════════════════ -->
+<div>
+  <p class="section-label">على خلفيات مختلفة</p>
+  <div class="bg-variants">
+    <div class="bg-card on-dark">
+      <div class="mini-name">قطّ<span>ه</span></div>
+      <div class="mini-tag">خلفية داكنة</div>
+    </div>
+    <div class="bg-card on-white">
+      <div class="mini-name">قطّ<span>ه</span></div>
+      <div class="mini-tag">خلفية بيضاء</div>
+    </div>
+    <div class="bg-card on-green">
+      <div class="mini-name">قطّ<span>ه</span></div>
+      <div class="mini-tag">خلفية خضراء</div>
+    </div>
+  </div>
+</div>
+
+</body>
+</html>
