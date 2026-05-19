@@ -83,7 +83,9 @@ const ScreenCard = ({
 
 const AppStoreBadge = ({ className = "" }: { className?: string }) => (
   <a
-    href="#"
+    href="https://apps.apple.com/us/app/qattah-app/id6768451077"
+    target="_blank"
+    rel="noopener noreferrer"
     data-testid="badge-appstore"
     className={`inline-flex items-center gap-3 bg-black border border-white/15 rounded-2xl px-5 py-3 hover:border-white/30 hover:bg-white/5 transition-all duration-200 ${className}`}
   >
