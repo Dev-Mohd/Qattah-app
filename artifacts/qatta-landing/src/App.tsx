@@ -19,9 +19,17 @@ import {
   BarChart3,
   Moon,
   Palette,
-  Database
+  Database,
+  Receipt,
+  LayoutGrid,
+  MessageCircle,
+  UserPlus,
+  Smartphone,
+  Wallet
 } from "lucide-react";
 
+const APP_STORE_URL = "https://apps.apple.com/us/app/qattah-app/id6768451077";
+import PrivacyPage from "./pages/privacy";
 import screen1 from "@assets/WhatsApp_Image\u200f_1447-11-30_at_11.54.36_(2)_1779008325210.jpeg";
 import screen2 from "@assets/WhatsApp_Image\u200f_1447-11-30_at_11.54.35_(3)_1779008325210.jpeg";
 import screen3 from "@assets/WhatsApp_Image\u200f_1447-11-30_at_11.54.36_(3)_1779008325210.jpeg";
@@ -59,7 +67,7 @@ const QattahIcon = ({ id = "a", size = 40 }: { id?: string; size?: number }) => 
 );
 
 const QattahWordmark = ({ className = "text-2xl" }: { className?: string }) => (
-  <span className={`font-black text-white tracking-tight ${className}`}>
+  <span className={`font-black text-white ${className}`}>
     قطّ<span className="text-accent">ه</span>
   </span>
 );
@@ -76,14 +84,14 @@ const ScreenCard = ({
   <div className={`relative w-full max-w-sm mx-auto ${className}`}>
     <div className="absolute inset-0 bg-accent/10 rounded-full blur-3xl scale-75 -z-10" />
     <div className="relative rounded-3xl overflow-hidden shadow-2xl shadow-black/60 ring-1 ring-white/8">
-      <img src={src} alt={alt} className="w-full block" />
+      <img src={src} alt={alt} loading="lazy" decoding="async" width={720} height={1560} className="w-full h-auto block" />
     </div>
   </div>
 );
 
 const AppStoreBadge = ({ className = "" }: { className?: string }) => (
   <a
-    href="https://apps.apple.com/us/app/qattah-app/id6768451077"
+    href={APP_STORE_URL}
     target="_blank"
     rel="noopener noreferrer"
     data-testid="badge-appstore"
@@ -94,45 +102,10 @@ const AppStoreBadge = ({ className = "" }: { className?: string }) => (
     </svg>
     <div>
       <div className="text-white/50 text-[10px] font-medium leading-none mb-1">Download on the</div>
-      <div className="text-white text-[18px] font-bold leading-none tracking-tight">App Store</div>
+      <div className="text-white text-[18px] font-bold leading-none">App Store</div>
     </div>
   </a>
 );
-
-const GooglePlayBadge = ({ className = "" }: { className?: string }) => (
-  <a
-    href="#"
-    data-testid="badge-playstore"
-    className={`inline-flex items-center gap-3 bg-black border border-white/15 rounded-2xl px-5 py-3 hover:border-white/30 hover:bg-white/5 transition-all duration-200 ${className}`}
-  >
-    <svg width="24" height="26" viewBox="0 0 24 26">
-      <path fill="#34A853" d="M0 23.1V2.9c0-.5.3-.9.7-1.1L13.4 13 .7 24.2c-.4-.2-.7-.6-.7-1.1z"/>
-      <path fill="#EA4335" d="M17.8 17.3l-4.4-4.3 4.4-4.3 4.9 2.8c1.4.8 1.4 2.2 0 3l-4.9 2.8z"/>
-      <path fill="#FBBC05" d="M13.4 13L.7 1.8c.1 0 .2-.1.3-.1.3 0 .6.1.9.3l15.9 9.2-4.4 1.8z"/>
-      <path fill="#4285F4" d="M13.4 13l4.4 4.3L1.9 26c-.3.2-.6.3-.9.3-.1 0-.2 0-.3-.1L13.4 13z"/>
-    </svg>
-    <div>
-      <div className="text-white/50 text-[10px] font-medium leading-none mb-1">Get it on</div>
-      <div className="text-white text-[18px] font-bold leading-none tracking-tight">Google Play</div>
-    </div>
-  </a>
-);
-
-const Button = ({ children, variant = "primary", className = "", ...props }: any) => {
-  const variants: Record<string, string> = {
-    primary: "bg-accent text-black hover:bg-accent/90 shadow-lg shadow-accent/20",
-    white: "bg-white text-black hover:bg-white/90 shadow-lg shadow-white/10",
-    outline: "border border-white/20 bg-transparent hover:bg-white/10 text-white",
-  };
-  return (
-    <button
-      className={`px-6 py-3 rounded-full font-bold transition-all duration-300 flex items-center justify-center gap-2 ${variants[variant]} ${className}`}
-      {...props}
-    >
-      {children}
-    </button>
-  );
-};
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -147,14 +120,19 @@ const Navbar = () => {
 
         <div className="hidden md:flex items-center gap-7">
           <a href="#features" className="text-sm font-bold text-white/70 hover:text-white transition-colors" data-testid="nav-features">المميزات</a>
+          <a href="#new" className="text-sm font-bold text-white/70 hover:text-white transition-colors">الجديد</a>
           <a href="#screens" className="text-sm font-bold text-white/70 hover:text-white transition-colors" data-testid="nav-screens">الشاشات</a>
           <a href="#how-it-works" className="text-sm font-bold text-white/70 hover:text-white transition-colors" data-testid="nav-how-it-works">كيف تعمل</a>
           <a href="#reports" className="text-sm font-bold text-white/70 hover:text-white transition-colors" data-testid="nav-reports">التقارير</a>
           <a href="#faq" className="text-sm font-bold text-white/70 hover:text-white transition-colors" data-testid="nav-faq">الأسئلة الشائعة</a>
-          <Button variant="primary" className="px-6 py-2.5 text-sm" data-testid="nav-download">حمّل التطبيق</Button>
+          <a href={APP_STORE_URL} target="_blank" rel="noopener noreferrer" data-testid="nav-download"
+             className="px-6 py-2.5 text-sm rounded-full font-bold bg-accent text-black hover:bg-accent/90 shadow-lg shadow-accent/20 transition-all">
+            حمّل التطبيق
+          </a>
         </div>
 
-        <button className="md:hidden text-white" onClick={() => setIsOpen(!isOpen)} data-testid="nav-mobile-toggle">
+        <button className="md:hidden text-white" onClick={() => setIsOpen(!isOpen)} data-testid="nav-mobile-toggle"
+                aria-label={isOpen ? "إغلاق القائمة" : "فتح القائمة"} aria-expanded={isOpen}>
           {isOpen ? <X /> : <Menu />}
         </button>
       </div>
@@ -169,11 +147,15 @@ const Navbar = () => {
           >
             <div className="flex flex-col p-6 gap-4">
               <a href="#features" className="text-lg font-bold text-white/70 hover:text-white" onClick={() => setIsOpen(false)}>المميزات</a>
+              <a href="#new" className="text-lg font-bold text-white/70 hover:text-white" onClick={() => setIsOpen(false)}>الجديد</a>
               <a href="#screens" className="text-lg font-bold text-white/70 hover:text-white" onClick={() => setIsOpen(false)}>الشاشات</a>
               <a href="#how-it-works" className="text-lg font-bold text-white/70 hover:text-white" onClick={() => setIsOpen(false)}>كيف تعمل</a>
               <a href="#reports" className="text-lg font-bold text-white/70 hover:text-white" onClick={() => setIsOpen(false)}>التقارير</a>
               <a href="#faq" className="text-lg font-bold text-white/70 hover:text-white" onClick={() => setIsOpen(false)}>الأسئلة الشائعة</a>
-              <Button variant="primary" className="w-full mt-4">حمّل التطبيق</Button>
+              <a href={APP_STORE_URL} target="_blank" rel="noopener noreferrer"
+                 className="w-full mt-4 px-6 py-3 rounded-full font-bold bg-accent text-black text-center">
+                حمّل التطبيق
+              </a>
             </div>
           </motion.div>
         )}
@@ -196,10 +178,10 @@ const Hero = () => (
         >
           <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/5 border border-white/10 mb-8 backdrop-blur-md">
             <span className="flex w-2 h-2 rounded-full bg-accent animate-pulse" />
-            <span className="text-sm font-bold text-white/80">التطبيق الأول لإدارة مصاريف الدوام في السعودية</span>
+            <span className="text-sm font-bold text-white/80">إصدار جديد كلياً · كلٌّ حسب طلبه والودجت</span>
           </div>
 
-          <h1 className="text-[72px] md:text-[88px] font-black text-white leading-[1.1] mb-6 tracking-tight">
+          <h1 className="text-[44px] sm:text-[64px] md:text-[88px] font-black text-white leading-[1.15] mb-6">
             نظّم وجبات الدوام<br />
             <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#10b981] to-[#34d399]">وشارك بالعدل</span>
           </h1>
@@ -210,23 +192,22 @@ const Hero = () => (
 
           <div className="flex flex-col sm:flex-row items-center gap-4 justify-center lg:justify-start">
             <AppStoreBadge className="w-full sm:w-auto justify-center" />
-            <GooglePlayBadge className="w-full sm:w-auto justify-center" />
           </div>
 
           <div className="mt-12 flex items-center gap-6 justify-center lg:justify-start">
             <div className="text-center">
-              <p className="text-2xl font-black text-white">+1,200</p>
-              <p className="text-xs font-bold text-white/30 mt-1 uppercase tracking-[3px]">مستخدم</p>
+              <p className="text-xl sm:text-2xl font-black text-white whitespace-nowrap">بدون حساب</p>
+              <p className="text-xs font-bold text-white/40 mt-1">ابدأ فوراً</p>
             </div>
             <div className="w-px h-10 bg-white/10" />
             <div className="text-center">
-              <p className="text-2xl font-black text-white">4.9 ★</p>
-              <p className="text-xs font-bold text-white/30 mt-1 uppercase tracking-[3px]">تقييم المتجر</p>
+              <p className="text-xl sm:text-2xl font-black text-white whitespace-nowrap">مشفّر</p>
+              <p className="text-xs font-bold text-white/40 mt-1">على جهازك فقط</p>
             </div>
             <div className="w-px h-10 bg-white/10" />
             <div className="text-center">
-              <p className="text-2xl font-black text-white">مجاني</p>
-              <p className="text-xs font-bold text-white/30 mt-1 uppercase tracking-[3px]">للتحميل</p>
+              <p className="text-xl sm:text-2xl font-black text-white whitespace-nowrap">مجاني</p>
+              <p className="text-xs font-bold text-white/40 mt-1">للتحميل</p>
             </div>
           </div>
         </motion.div>
@@ -250,7 +231,7 @@ const Values = () => {
     { icon: <Clock className="w-6 h-6 text-accent" />, title: "حساب تلقائي", desc: "حدّد الحاضرين والتطبيق يوزّع المبلغ بالعدل على من حضر فقط" },
     { icon: <CreditCard className="w-6 h-6 text-accent" />, title: "تتبع السداد", desc: "تابع السداد الجزئي والكامل لكل عضو واعرف من سدّد ومن لم يسدّد" },
     { icon: <FileText className="w-6 h-6 text-accent" />, title: "تقارير PDF", desc: "أصدر تقريراً شهرياً احترافياً بهوية قطّه وشاركه مباشرة" },
-    { icon: <Bell className="w-6 h-6 text-accent" />, title: "تذكير يومي", desc: "إشعار يومي يذكّرك بتسجيل الوجبة حتى لا تفوتك أي وجبة" },
+    { icon: <Bell className="w-6 h-6 text-accent" />, title: "تذكير بالواتساب", desc: "رسالة جاهزة لكل عضو بمبلغه ورقم الآيبان تُفتح في الواتساب مباشرة" },
     { icon: <ShieldCheck className="w-6 h-6 text-accent" />, title: "أمان وتشفير", desc: "قاعدة بيانات مشفرة بـ SQLCipher وبياناتك محمية ولا تغادر جهازك" },
   ];
 
@@ -302,10 +283,10 @@ const FeatureBlock = ({
       viewport={{ once: true }}
       className="flex-1"
     >
-      <span className="inline-block text-[11px] font-bold text-accent bg-accent/10 border border-accent/20 px-3 py-1 rounded-full mb-5 tracking-[3px] uppercase">
+      <span className="inline-block text-[13px] font-bold text-accent bg-accent/10 border border-accent/20 px-3 py-1 rounded-full mb-5">
         {tag}
       </span>
-      <h2 className="text-[48px] md:text-[64px] font-black text-white mb-6 leading-tight tracking-tight">
+      <h2 className="text-[34px] sm:text-[48px] md:text-[64px] font-black text-white mb-6 leading-tight">
         {title}
       </h2>
       <p className="text-[18px] md:text-[20px] text-white/55 mb-8 font-medium leading-[1.7] max-w-lg">{desc}</p>
@@ -365,7 +346,7 @@ const HowItWorks = () => {
     <section id="how-it-works" className="py-32 bg-[#0d1612] relative border-y border-white/5" dir="rtl">
       <div className="container mx-auto px-6">
         <div className="text-center mb-24">
-          <h2 className="text-[48px] md:text-[64px] font-black text-white mb-4 tracking-tight">كيف يعمل التطبيق</h2>
+          <h2 className="text-[34px] sm:text-[48px] md:text-[64px] font-black text-white mb-4">كيف يعمل التطبيق</h2>
           <p className="text-[20px] text-white/55 font-medium max-w-2xl mx-auto">أربع خطوات بسيطة تريحك من الحسابات اليدوية</p>
         </div>
 
@@ -407,13 +388,13 @@ const AppScreens = () => {
     <section id="screens" className="py-32 bg-[#0A0F0D]" dir="rtl">
       <div className="container mx-auto px-6">
         <div className="text-center mb-20">
-          <h2 className="text-[48px] md:text-[64px] font-black text-white mb-5 tracking-tight">واجهة مصممة بعناية</h2>
+          <h2 className="text-[34px] sm:text-[48px] md:text-[64px] font-black text-white mb-5">واجهة مصممة بعناية</h2>
           <p className="text-[20px] text-white/55 font-medium max-w-xl mx-auto">
             تجربة مستخدم عربية سلسة وواضحة
           </p>
         </div>
 
-        <div className="flex gap-8 pb-4 snap-x snap-mandatory justify-center flex-wrap md:flex-nowrap">
+        <div className="flex gap-6 pb-6 snap-x snap-mandatory overflow-x-auto -mx-6 px-6 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
           {screens.map((s, i) => (
             <motion.div
               key={i}
@@ -425,7 +406,7 @@ const AppScreens = () => {
             >
               <ScreenCard src={s.img} alt={s.label} />
               <div className="text-center mt-2">
-                <span className="text-[11px] font-bold text-white/30 tracking-[3px] uppercase px-4 py-2 rounded-full border border-white/5 bg-white/5">
+                <span className="text-[13px] font-bold text-white/50 px-4 py-2 rounded-full border border-white/5 bg-white/5">
                   {s.label}
                 </span>
               </div>
@@ -447,7 +428,7 @@ const Reports = () => (
           viewport={{ once: true }}
           className="flex-1"
         >
-          <h2 className="text-[48px] md:text-[64px] font-black text-white mb-6 leading-tight tracking-tight">
+          <h2 className="text-[34px] sm:text-[48px] md:text-[64px] font-black text-white mb-6 leading-tight">
             تقارير شهرية واضحة واحترافية
           </h2>
           <p className="text-[18px] md:text-[20px] text-white/55 mb-8 font-medium leading-[1.7]">
@@ -488,16 +469,16 @@ const AdvancedFeatures = () => {
     { icon: <Users />, title: "أعضاء غير محدودين", desc: "أضف العدد الذي تحتاجه من الزملاء بدون أي قيود" },
     { icon: <Palette />, title: "الوضع الليلي والنهاري", desc: "واجهة تتكيّف مع تفضيلاتك وتدعم الوضع المظلم بالكامل" },
     { icon: <Download />, title: "نسخ احتياطي", desc: "احفظ نسخة من بياناتك واسترجعها في أي وقت" },
-    { icon: <ShieldCheck />, title: "حماية بالبصمة", desc: "قفل التطبيق باستخدام بصمة الوجه أو الإصبع لمزيد من الأمان" },
+    { icon: <Smartphone />, title: "ودجت للشاشة الرئيسية", desc: "المستحق وزر تسجيل وجبة اليوم بلمسة من الشاشة الرئيسية وشاشة القفل" },
     { icon: <BarChart3 />, title: "إحصائيات تفصيلية", desc: "رسوم بيانية توضّح معدل الصرف الشهري والتغيرات" },
-    { icon: <Moon />, title: "إشعارات ذكية", desc: "تنبيهات بأوقات الوجبات والسداد المستحق" },
+    { icon: <Moon />, title: "تذكير يومي ذكي", desc: "لا يزعجك إذا سجّلت وجبتك ويذكّرك بالمبلغ المستحق" },
   ];
 
   return (
     <section className="py-32 bg-[#0A0F0D]" dir="rtl">
       <div className="container mx-auto px-6">
         <div className="text-center mb-20">
-          <h2 className="text-[48px] md:text-[64px] font-black text-white mb-5 tracking-tight">مزايا متقدمة</h2>
+          <h2 className="text-[34px] sm:text-[48px] md:text-[64px] font-black text-white mb-5">مزايا متقدمة</h2>
         </div>
         <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
           {features.map((f, i) => (
@@ -552,7 +533,9 @@ const SimpleWorkflow = () => (
 const FAQ = () => {
   const [openIndex, setOpenIndex] = useState<number | null>(0);
   const faqs = [
-    { q: "هل التطبيق مجاني", a: "نعم تطبيق قطّه مجاني بالكامل للتحميل والاستخدام الأساسي" },
+    { q: "هل التطبيق مجاني", a: "نعم تطبيق قطّه مجاني بالكامل للتحميل والاستخدام" },
+    { q: "هل يمكن أن يدفع كل شخص حسب طلبه", a: "نعم اختر طريقة التقسيم كلٌّ حسب طلبه وأضف أصناف كل شخص من قائمة المطعم والتوصيل يتوزع بالعدل حسب قيمة الطلب" },
+    { q: "هل التطبيق متوفر على أندرويد", a: "حالياً على الآيفون والآيباد فقط ويكفي أن يكون التطبيق عند منظّم القطة" },
     { q: "هل يحتاج الأعضاء تحميل التطبيق", a: "لا يكفي أن يقوم شخص واحد بتحميل التطبيق وإدارة القائمة وإرسال التقارير للبقية" },
     { q: "هل بياناتي محفوظة في السحابة", a: "لا فكل بياناتك مشفرة ومحفوظة محلياً في جهازك لضمان الخصوصية التامة" },
     { q: "كيف تتم عملية السداد", a: "التطبيق لا يقوم بتحويل الأموال وهو يحسب فقط من له ومن عليه والتحويل يتم بينكم كالمعتاد" },
@@ -564,7 +547,7 @@ const FAQ = () => {
     <section id="faq" className="py-32 bg-[#0A0F0D]" dir="rtl">
       <div className="container mx-auto px-6 max-w-3xl">
         <div className="text-center mb-16">
-          <h2 className="text-[48px] md:text-[64px] font-black text-white mb-5 tracking-tight">الأسئلة الشائعة</h2>
+          <h2 className="text-[34px] sm:text-[48px] md:text-[64px] font-black text-white mb-5">الأسئلة الشائعة</h2>
         </div>
 
         <div className="space-y-4">
@@ -579,8 +562,9 @@ const FAQ = () => {
               <button
                 className="w-full px-6 py-5 flex items-center justify-between text-right"
                 onClick={() => setOpenIndex(openIndex === i ? null : i)}
+                aria-expanded={openIndex === i}
               >
-                <span className="text-[18px] font-bold text-white">{faq.q}</span>
+                <span className="text-[18px] font-bold text-white">{faq.q}؟</span>
                 <ChevronDown className={`w-5 h-5 text-white/50 transition-transform duration-300 ${openIndex === i ? "rotate-180" : ""}`} />
               </button>
               <AnimatePresence>
@@ -611,7 +595,7 @@ const CTA = () => (
       <div className="bg-gradient-to-br from-[#065F46] to-[#042f23] rounded-[3rem] p-12 md:p-20 text-center relative overflow-hidden border border-white/10 shadow-2xl">
         <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-[#10b981]/20 rounded-full blur-[100px] pointer-events-none" />
         <div className="relative z-10">
-          <h2 className="text-[48px] md:text-[64px] font-black text-white mb-6 tracking-tight leading-tight">
+          <h2 className="text-[34px] sm:text-[48px] md:text-[64px] font-black text-white mb-6 leading-tight">
             هل أنت مستعد للتخلص من الحسابات اليدوية
           </h2>
           <p className="text-[20px] text-white/80 font-medium mb-10 max-w-xl mx-auto leading-[1.7]">
@@ -619,13 +603,54 @@ const CTA = () => (
           </p>
           <div className="flex flex-col sm:flex-row items-center gap-4 justify-center">
             <AppStoreBadge className="w-full sm:w-auto justify-center" />
-            <GooglePlayBadge className="w-full sm:w-auto justify-center" />
           </div>
         </div>
       </div>
     </div>
   </section>
 );
+
+const NewFeatures = () => {
+  const items = [
+    { icon: <Receipt className="w-7 h-7 text-accent" />, title: "كلٌّ حسب طلبه", desc: "فول بثمانية وتميس وشاي بخمسة عشر؟ أضف طلب كل شخص من قائمة المطعم والتطبيق يحسب نصيبه بالهللة ويوزّع التوصيل بالعدل" },
+    { icon: <LayoutGrid className="w-7 h-7 text-accent" />, title: "نفس طلب أمس بضغطة", desc: "كرّر طلبات آخر فطور وانسخ الطلب مجمّعاً جاهزاً للمطعم مثل ٣ فول و٥ تميس" },
+    { icon: <MessageCircle className="w-7 h-7 text-accent" />, title: "تحصيل بدون إحراج", desc: "ذكّر الكل برسالة واتساب لكل شخص فيها مبلغه ورقم الآيبان وأرسل كشف حساب PDF أنيقاً لكل عضو" },
+    { icon: <UserPlus className="w-7 h-7 text-accent" />, title: "ضيف ومن دفع؟", desc: "ضيف لمرة واحدة على حساب من دعاه ومن دفع للمطعم من جيبه يُحسب له تلقائياً" },
+    { icon: <Smartphone className="w-7 h-7 text-accent" />, title: "ودجت واختصارات Siri", desc: "سجّل وجبة اليوم من الشاشة الرئيسية أو قل لسيري سجّل وجبة في قطه" },
+    { icon: <Wallet className="w-7 h-7 text-accent" />, title: "تقارير ورسوم بيانية", desc: "تقرير شهري مع رسم يومي وتوزيع حسب الوجبة ورصيد مرحّل دقيق وتصدير PDF" },
+  ];
+
+  return (
+    <section id="new" className="py-28 bg-[#0d1612] border-y border-white/5" dir="rtl">
+      <div className="container mx-auto px-6">
+        <div className="text-center mb-16">
+          <span className="inline-block text-[13px] font-bold text-accent bg-accent/10 border border-accent/20 px-3 py-1 rounded-full mb-5">جديد في الإصدار ٢</span>
+          <h2 className="text-[34px] sm:text-[48px] md:text-[64px] font-black text-white mb-4">قطّه صار أذكى</h2>
+          <p className="text-[18px] md:text-[20px] text-white/55 font-medium max-w-2xl mx-auto">أُعيد بناء التطبيق بالكامل ليكون أسرع وأدق وأسهل في الاستخدام اليومي</p>
+        </div>
+        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+          {items.map((item, i) => (
+            <motion.div
+              key={item.title}
+              initial={{ opacity: 0, y: 24 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: i * 0.07 }}
+              className="relative bg-gradient-to-br from-[#14251c] to-[#0f1a14] p-8 rounded-3xl border border-white/5 hover:border-accent/30 transition-colors overflow-hidden"
+            >
+              <div className="absolute -top-12 -left-12 w-40 h-40 bg-accent/10 rounded-full blur-3xl" />
+              <div className="relative w-14 h-14 rounded-2xl bg-[#0A0F0D] flex items-center justify-center mb-6 border border-white/5">
+                {item.icon}
+              </div>
+              <h3 className="relative text-[22px] font-black text-white mb-3">{item.title}</h3>
+              <p className="relative text-[17px] text-white/60 font-medium leading-[1.8]">{item.desc}</p>
+            </motion.div>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+};
 
 const Footer = () => (
   <footer className="bg-[#0A0F0D] pt-16 pb-8 border-t border-white/5" dir="rtl">
@@ -640,6 +665,8 @@ const Footer = () => (
           <a href="#screens" className="text-sm font-bold text-white/50 hover:text-white transition-colors">الشاشات</a>
           <a href="#how-it-works" className="text-sm font-bold text-white/50 hover:text-white transition-colors">كيف تعمل</a>
           <a href="#faq" className="text-sm font-bold text-white/50 hover:text-white transition-colors">الأسئلة الشائعة</a>
+          <a href={`${import.meta.env.BASE_URL}privacy`} className="text-sm font-bold text-white/50 hover:text-white transition-colors">سياسة الخصوصية</a>
+          <a href="https://instagram.com/qattah.app" target="_blank" rel="noopener noreferrer" className="text-sm font-bold text-white/50 hover:text-white transition-colors">تواصل معنا</a>
         </div>
       </div>
       <div className="text-center text-white/30 text-sm font-medium">
@@ -650,10 +677,14 @@ const Footer = () => (
 );
 
 export default function App() {
+  if (window.location.pathname.replace(/\/+$/, "").endsWith("/privacy")) {
+    return <PrivacyPage />;
+  }
   return (
     <div className="min-h-screen bg-[#0A0F0D] text-white selection:bg-accent selection:text-black">
       <Navbar />
       <Hero />
+      <NewFeatures />
       <Values />
       <Features />
       <HowItWorks />
